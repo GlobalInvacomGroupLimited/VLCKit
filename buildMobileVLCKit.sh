@@ -5,7 +5,7 @@
 set -e
 
 BUILD_DEVICE=yes
-BUILD_SIMULATOR=yes
+BUILD_SIMULATOR=no
 BUILD_STATIC_FRAMEWORK=no
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 SDK_MIN=7.0
