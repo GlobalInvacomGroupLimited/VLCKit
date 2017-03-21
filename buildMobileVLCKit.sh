@@ -112,6 +112,7 @@ fi
 
 spushd()
 {
+     mkdir -p $1
      pushd "$1" 2>&1> /dev/null
 }
 
