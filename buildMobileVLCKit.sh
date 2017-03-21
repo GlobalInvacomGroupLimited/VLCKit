@@ -179,11 +179,11 @@ echo `pwd`
 
 if [ "$NONETWORK" != "yes" ]; then
 if ! [ -e vlc ]; then
-git clone git://git.videolan.org/vlc.git vlc
+git clone https://github.com/GlobalInvacomGroupLimited/vlc.git vlc
 info "Applying patches to vlc.git"
 cd vlc
-git checkout -B localBranch ${TESTEDHASH}
-git branch --set-upstream-to=origin/master localBranch
+git checkout gi_master
+#git branch --set-upstream-to=origin/master localBranch
 git am ${ROOT_DIR}/Resources/MobileVLCKit/patches/*.patch
 if [ $? -ne 0 ]; then
 git am --abort
