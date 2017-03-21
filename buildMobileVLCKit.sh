@@ -191,12 +191,6 @@ info "Applying the patches failed, aborting git-am"
 exit 1
 fi
 cd ..
-else
-cd vlc
-git pull --rebase
-git reset --hard ${TESTEDHASH}
-git am ${ROOT_DIR}/Resources/MobileVLCKit/patches/*.patch
-cd ..
 fi
 fi
 
