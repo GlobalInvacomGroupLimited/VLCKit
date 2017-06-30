@@ -1,12 +1,12 @@
-From 2be3b715533e501857003e8276e336cf60fe39a2 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Felix=20Paul=20K=C3=BChne?= <fkuehne@videolan.org>
-Date: Fri, 22 Jul 2016 11:11:44 +0200
-Subject: [PATCH 08/17] Enable System DL
+From a915ac261db642a8ec7921f548a8aeadee63af81 Mon Sep 17 00:00:00 2001
+From: Steven Fisher <steven.fisher@globalinvacom.com>
+Date: Fri, 30 Jun 2017 15:58:42 -0400
+Subject: [PATCH] Enable System DL
 
 ---
  contrib/src/ffmpeg/patch-as-patch-can.patch | 20 ++++++++++++++++++++
- contrib/src/ffmpeg/rules.mak                |  4 ++++
- 2 files changed, 24 insertions(+)
+ contrib/src/ffmpeg/rules.mak                |  6 +++++-
+ 2 files changed, 25 insertions(+), 1 deletion(-)
  create mode 100644 contrib/src/ffmpeg/patch-as-patch-can.patch
 
 diff --git a/contrib/src/ffmpeg/patch-as-patch-can.patch b/contrib/src/ffmpeg/patch-as-patch-can.patch
@@ -36,9 +36,18 @@ index 0000000000..2d60cf7140
 +         in_format.mSampleRate = avctx->sample_rate ? avctx->sample_rate : 44100;
 +         in_format.mChannelsPerFrame = avctx->channels ? avctx->channels : 1;
 diff --git a/contrib/src/ffmpeg/rules.mak b/contrib/src/ffmpeg/rules.mak
-index c37d463706..29b2f6c878 100644
+index 1099f5dd52..6f604b597f 100644
 --- a/contrib/src/ffmpeg/rules.mak
 +++ b/contrib/src/ffmpeg/rules.mak
+@@ -5,7 +5,7 @@
+ USE_FFMPEG ?= 1
+ 
+ ifdef USE_FFMPEG
+-FFMPEG_HASH=0768aaec1d683226e613e692080a588359c31334
++FFMPEG_HASH=911417f0b34e611bf084319c5b5a4e4e630da940
+ FFMPEG_SNAPURL := http://git.videolan.org/?p=ffmpeg.git;a=snapshot;h=$(FFMPEG_HASH);sf=tgz
+ FFMPEG_GITURL := http://git.videolan.org/git/ffmpeg.git
+ else
 @@ -24,6 +24,9 @@ FFMPEGCONF = \
  	--disable-decoder=opus \
  	--enable-libgsm \
@@ -49,14 +58,14 @@ index c37d463706..29b2f6c878 100644
  	--disable-debug \
  	--disable-avdevice \
  	--disable-devices \
-@@ -227,6 +230,7 @@ ffmpeg: ffmpeg-$(FFMPEG_BASENAME).tar.xz .sum-ffmpeg
- ifdef USE_FFMPEG
+@@ -228,6 +231,7 @@ ifdef USE_FFMPEG
  	$(APPLY) $(SRC)/ffmpeg/force-unicode.patch
+ 	$(APPLY) $(SRC)/ffmpeg/libs.patch
  endif
 +	$(APPLY) $(SRC)/ffmpeg/patch-as-patch-can.patch
  	$(MOVE)
  
  .ffmpeg: ffmpeg
 -- 
-2.11.0
+2.11.0 (Apple Git-81)
 
