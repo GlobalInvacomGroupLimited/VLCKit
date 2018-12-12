@@ -9,7 +9,7 @@ BUILD_SIMULATOR=yes
 BUILD_STATIC_FRAMEWORK=no
 BUILD_DYNAMIC_FRAMEWORK=no
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
-SDK_MIN=7.0
+SDK_MIN=8.0
 VERBOSE=no
 DEBUG=no
 CONFIGURATION="Release"
@@ -25,8 +25,7 @@ OSVERSIONMINLDFLAG=ios_version_min
 ROOT_DIR=empty
 FARCH="all"
 
-TESTEDHASH="177a4a2a5" # libvlc hash that this version of VLCKit is build on
-
+TESTEDHASH="800136ef7" # libvlc hash that this version of VLCKit is build on
 if [ -z "$MAKE_JOBS" ]; then
     CORE_COUNT=`sysctl -n machdep.cpu.core_count`
     let MAKE_JOBS=$CORE_COUNT+1
@@ -966,7 +965,7 @@ do
              ;;
          a)
              BUILD_DEVICE=yes
-             BUILD_SIMULATOR=yes
+             BUILD_SIMULATOR=no
              BUILD_STATIC_FRAMEWORK=yes
              FARCH=$OPTARG
              ;;
@@ -1030,9 +1029,10 @@ if [ "$VLCROOT" = "" ]; then
 
     if [ "$NONETWORK" != "yes" ]; then
         if ! [ -e vlc ]; then
-            git clone https://git.videolan.org/git/vlc/vlc-3.0.git vlc
+            git clone https://github.com/GlobalInvacomGroupLimited/vlc.git vlc
             info "Applying patches to vlc.git"
             cd vlc
+            git checkout gi_master
             git checkout -B localBranch ${TESTEDHASH}
             git branch --set-upstream-to=origin/master localBranch
             git am ${ROOT_DIR}/Resources/MobileVLCKit/patches/*.patch
