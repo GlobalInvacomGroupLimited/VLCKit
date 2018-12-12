@@ -1,33 +1,18 @@
-From a69b13b0a86f1f74be3b765484e75e6080547fea Mon Sep 17 00:00:00 2001
-From: Carola Nitz <nitz.carola@googlemail.com>
-Date: Fri, 29 Sep 2017 14:49:02 +0200
-Subject: [PATCH 10/24] contrib: use live555 version that is compatible with
- LGPL2
+From 03b8d54fc2b7e84a4e8a9c9a8835d166002368f3 Mon Sep 17 00:00:00 2001
+From: Steven Fisher <steven.fisher@globalinvacom.com>
+Date: Thu, 6 Dec 2018 18:59:37 -0500
+Subject: [PATCH] contrib use live555 version that is compatible with LGPL
 
 ---
- contrib/src/live555/SHA512SUMS | 2 +-
- contrib/src/live555/rules.mak  | 5 +----
- 2 files changed, 2 insertions(+), 5 deletions(-)
+ contrib/src/live555/rules.mak | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/contrib/src/live555/SHA512SUMS b/contrib/src/live555/SHA512SUMS
-index f459fb9d16..02b2a69734 100644
---- a/contrib/src/live555/SHA512SUMS
-+++ b/contrib/src/live555/SHA512SUMS
-@@ -1 +1 @@
--319639acef6474b2eec0bdfa3416ca3c88a60f57d9d22911eee018fc494978fde93a241556bc0ea309f0b6a35e0242bd44a8f4de83a845f80d9ca5f94254ade6  live.2016.11.28.tar.gz
-+10846fd6d5482bbea131ae805137077997e9dec242665e3c01d699d5584154c65049e8c520ea855599e554154a148e61fea77b592d97c814a4a98c773658d8f5  live.2016.10.21.tar.gz
-\ No newline at end of file
 diff --git a/contrib/src/live555/rules.mak b/contrib/src/live555/rules.mak
-index 9b275ec33b..30ee48eece 100644
+index 5f2ec246f2..76bb4f566d 100644
 --- a/contrib/src/live555/rules.mak
 +++ b/contrib/src/live555/rules.mak
-@@ -1,14 +1,12 @@
- # live555
+@@ -14,10 +14,8 @@ endif
  
--LIVE555_VERSION := 2016.11.28
-+LIVE555_VERSION := 2016.10.21
- LIVE555_FILE := live.$(LIVE555_VERSION).tar.gz
- LIVEDOTCOM_URL := http://live555.com/liveMedia/public/$(LIVE555_FILE)
  
  ifdef BUILD_NETWORK
 -ifdef GNUV3
@@ -35,9 +20,18 @@ index 9b275ec33b..30ee48eece 100644
  endif
 -endif
  
- ifeq ($(call need_pkg,"live555"),)
- PKGS_FOUND += live555
-@@ -90,7 +88,6 @@ endif
+ #ifeq ($(call need_pkg,"live555"),)
+ #PKGS_FOUND += live555
+@@ -57,7 +55,7 @@ LIVE_EXTRA_CFLAGS := $(EXTRA_CFLAGS) -fexceptions $(CFLAGS)
+ 
+ live555: live555-$(LIVE555_HASH).tar.xz .sum-live555
+ 	rm -Rf live555 && $(UNPACK)
+-	
++
+ 	mv live555-$(LIVE555_HASH) live
+ 
+ 	# Change permissions to patch and sed the source
+@@ -104,7 +102,6 @@ endif
  SUBDIRS=groupsock liveMedia UsageEnvironment BasicUsageEnvironment
  
  .live555: live555
@@ -46,5 +40,5 @@ index 9b275ec33b..30ee48eece 100644
  		echo "PREFIX = $(PREFIX)" >> $$subdir/Makefile.head && \
  		echo "LIBDIR = $(PREFIX)/lib" >> $$subdir/Makefile.head ; done
 -- 
-2.19.1
+2.17.2 (Apple Git-113)
 
