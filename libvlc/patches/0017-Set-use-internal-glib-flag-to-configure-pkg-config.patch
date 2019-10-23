@@ -1,0 +1,25 @@
+From 6f05edecedc76139d336666d2511d066fe9765ef Mon Sep 17 00:00:00 2001
+From: Steven Fisher <steven.fisher@globalinvacom.com>
+Date: Tue, 22 Oct 2019 15:15:14 -0400
+Subject: [PATCH] Set use internal glib flag to configure pkg-config
+
+---
+ extras/tools/tools.mak | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/extras/tools/tools.mak b/extras/tools/tools.mak
+index 0d942ce976..68d2da6acc 100644
+--- a/extras/tools/tools.mak
++++ b/extras/tools/tools.mak
+@@ -243,7 +243,7 @@ pkgconfig: pkg-config-$(PKGCFG_VERSION).tar.gz
+ 	$(MOVE)
+ 
+ .buildpkg-config: pkgconfig
+-	(cd pkgconfig; ./configure --prefix=$(PREFIX) --disable-shared --enable-static && $(MAKE) && $(MAKE) install)
++	(cd pkgconfig; ./configure --with-internal-glib --prefix=$(PREFIX) --disable-shared --enable-static && $(MAKE) && $(MAKE) install)
+ 	touch $@
+ 
+ CLEAN_FILE += .buildpkg-config
+-- 
+2.21.0 (Apple Git-122)
+
